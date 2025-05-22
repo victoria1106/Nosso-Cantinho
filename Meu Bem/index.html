@@ -1,94 +1,70 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <title>Kitty & Baby - Nosso Cantinho</title>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      background: linear-gradient(to bottom, #ffe0f0, #fff);
-      font-family: 'Patrick Hand', cursive;
-      text-align: center;
-      padding: 40px 20px;
-      color: #6f1d62;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-    }
-
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 320px;
-      margin: 0 auto 40px;
-    }
-
-    button {
-      padding: 15px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 12px;
-      background-color: #d6336c;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #a52052;
-    }
-
-    .link-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .link-list a {
-      color: #6f1d62;
-      font-size: 1.2rem;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .link-list a:hover {
-      color: #d6336c;
-      text-decoration: underline;
-    }
-
-    footer {
-      margin-top: 50px;
-      font-size: 0.9rem;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Cantinho 💖</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>🌸 Nosso Cantinho, Kitty & Baby 🌸</h1>
-
-  <div class="button-container">
-    <button onclick="location.href='cartinhas.html'">💌 Cartinhas</button>
-    <button onclick="location.href='mapa.html'">🌍 Mapa dos Lugares</button>
-    <button onclick="location.href='mensagem-secreta.html'">🔐 Mensagem Secreta</button>
-    <button onclick="location.href='por-que-eu-te-amo.html'">💖 Por que eu te amo</button>
-    <button onclick="location.href='quiz.html'">🎮 Quiz do Amor</button>
-    <button onclick="location.href='surpresa.html'">🎁 Surpresa Final</button>
+  <div id="home" class="page active">
+    <h1>Oi baby! 💕</h1>
+    <p>Preparei esse cantinho só nosso pra te lembrar o quanto eu te amo!</p>
+    <button onclick="navigateTo('cartinhas')">Entrar no nosso mundo ✨</button>
   </div>
 
-  <div class="link-list">
-    <a href="cartinhas.html">💌 Ler uma cartinha fofa</a>
-    <a href="mapa.html">📍 Ver nossos lugares dos sonhos</a>
-    <a href="mensagem-secreta.html">🗝️ Acessar a mensagem secreta</a>
-    <a href="por-que-eu-te-amo.html">🫶 Ler por que eu te amo</a>
-    <a href="quiz.html">🎮 Jogar o Quiz do Amor</a>
-    <a href="surpresa.html">🎁 Ver a surpresa final</a>
+  <div id="cartinhas" class="page">
+    <h2>💌 Minhas Cartinhas</h2>
+    <div class="cartas">
+      <div class="carta" onclick="abrirCarta('carta1')">Quando te conheci</div>
+      <div class="carta" onclick="abrirCarta('carta2')">Sinto sua falta</div>
+      <div class="carta" onclick="abrirCarta('carta3')">O futuro com você</div>
+    </div>
+    <div id="cartaTexto"></div>
+    <button onclick="navigateTo('viagens')">Próximo: Viagens dos Sonhos ✈️</button>
   </div>
 
-  <footer>
-    <p>Com muito amor, da Kitty para o Baby 🐱💕</p>
-  </footer>
+  <div id="viagens" class="page">
+    <h2>✈️ Nossas Viagens dos Sonhos</h2>
+    <ul>
+      <li>Paris - Ver a Torre Eiffel se iluminar juntinhos</li>
+      <li>Suiça - Passear de mãos dadas admirando a paisagem linda desse país</li>
+    </ul>
+    <button onclick="navigateTo('secretas')">Próximo: Mensagens Secretas 🔐</button>
+  </div>
+
+  <div id="secretas" class="page">
+    <h2>🔐 Mensagens Secretas</h2>
+    <p>Digite a senha: <input type="password" id="senha"><button onclick="verificarSenha()">Abrir</button></p>
+    <div id="mensagemSecreta"></div>
+    <button onclick="navigateTo('motivos')">Próximo: Por que eu te amo 💖</button>
+  </div>
+
+  <div id="motivos" class="page">
+    <h2>💖 Por que eu te amo tanto</h2>
+    <ul>
+      <li>💘 Porque você cuida de mim até nos pequenos detalhes</li>
+      <li>🐻 Porque você é meu porto seguro</li>
+      <li>💫 Porque com você, até o silêncio é confortável</li>
+    </ul>
+    <button onclick="navigateTo('quiz')">Próximo: Quiz do Amor 🎯</button>
+  </div>
+
+  <div id="quiz" class="page">
+    <h2>🎯 Quiz do Amor</h2>
+    <p>Qual foi o primeiro lugar que a gente saiu juntos?</p>
+    <button onclick="responderQuiz(true)">Restaurante X</button>
+    <button onclick="responderQuiz(false)">Shopping Y</button>
+    <div id="respostaQuiz"></div>
+    <button onclick="navigateTo('surpresa')">Próximo: Surpresa Final 🎁</button>
+  </div>
+
+  <div id="surpresa" class="page">
+    <h2>🎁 Surpresa Final</h2>
+    <p>Meu amor, você é o melhor presente que a vida me deu. Eu te amo com tudo o que sou. Obrigada por ser meu tudo, meu lar, meu baby. 💖</p>
+    <img src="https://media.giphy.com/media/l2R02P6ozPLbV0Z20/giphy.gif" alt="Beijinho" width="200">
+  </div>
 </body>
 </html>

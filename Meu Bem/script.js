@@ -1,64 +1,35 @@
-// Objeto para armazenar se as perguntas estão corretas
-const answersStatus = {
-  result1: false,
-  result2: false,
-};
+function navigateTo(pageId) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+  document.getElementById(pageId).classList.add('active');
+}
 
-function checkAnswer(button, correctAnswer, resultId) {
-  const result = document.getElementById(resultId);
-  const tryAgainBtn = document.getElementById('tryAgainBtn');
-  const nextBtn = document.getElementById('nextBtn');
+function abrirCarta(cartaId) {
+  const textos = {
+    carta1: "Desde que te conheci, minha vida mudou completamente, me sinto amada novamente. 💖",
+    carta2: "Sinto sua falta todos os dias. Quero poder te ver, te abraçar e te beijar. 🐾",
+    carta3: "Nosso futuro vai ser incrivel, cheio de amor, viagens e muitas risadas meu bem. ✨"
+  };
+  document.getElementById('cartaTexto').innerText = textos[cartaId];
+}
 
-  const userAnswer = button.innerText.trim().toLowerCase();
-  const expectedAnswer = correctAnswer.trim().toLowerCase();
+function verificarSenha() {
+  const senha = document.getElementById('senha').value;
+  const mensagem = document.getElementById('mensagemSecreta');
 
-  if (userAnswer === expectedAnswer) {
-    result.innerText = "Acertou! 💕";
-    result.style.color = "#d6336c";
-
-    // Marca essa pergunta como correta
-    answersStatus[resultId] = true;
+  if (senha.toLowerCase() === "baby") {
+    mensagem.innerHTML = "<p>💌 Te amo mais que chocolate! Obrigada por ser meu tudo! 💕</p>";
   } else {
-    result.innerText = "Hmm... tenta de novo, amor! 😽";
-    result.style.color = "#555";
-
-    // Marca essa pergunta como errada
-    answersStatus[resultId] = false;
-  }
-
-  // Se todas as perguntas estiverem certas, libera botão próximo
-  if (Object.values(answersStatus).every(status => status === true)) {
-    nextBtn.disabled = false;
-    tryAgainBtn.style.display = 'none';
-  } else {
-    nextBtn.disabled = true;
-    tryAgainBtn.style.display = 'inline-block';
+    mensagem.innerHTML = "<p>❌ Senha incorreta! Tenta de novo 😢</p>";
   }
 }
 
-// Função que reseta o quiz para tentar novamente
-function resetQuiz() {
-  // Limpa todos os resultados
-  for (const key in answersStatus) {
-    answersStatus[key] = false;
-    const result = document.getElementById(key);
-    if (result) {
-      result.innerText = '';
-    }
+function responderQuiz(acertou) {
+  const resposta = document.getElementById('respostaQuiz');
+  if (acertou) {
+    resposta.innerHTML = "✅ Isso mesmo! Você lembra de tudo como o melhor namorado do mundo que é 💘";
+  } else {
+    resposta.innerHTML = "❌ Ops! Errou... mas ainda te amo muito 😘";
   }
-
-  // Esconde botão tente novamente e bloqueia botão próximo
-  document.getElementById('tryAgainBtn').style.display = 'none';
-  document.getElementById('nextBtn').disabled = true;
-}
-
-
-
-function finalSurprise() {
-  document.getElementById('surprise').innerHTML = `
-    <p>💋 MUAAAH! Te amo muito, Baby! 💋</p>
-    <img src="https://i.pinimg.com/originals/ef/96/87/ef9687b36e36605b375b4e9b0cde51db.gif" 
-         alt="Beijo animado" 
-         style="width:100%;border-radius:10px;margin-top:10px">
-  `;
 }
